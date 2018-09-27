@@ -670,7 +670,8 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
       #
       # This check looks for this case, and adds '-p all' to the rule for ipv6.
       #
-      line = line.concat ['-p', 'all']
+      # NOTE: this seems to be the reverse currently - ip6tables -D doesn't work if -p all IS provided, so removing this
+      #line = line.concat ['-p', 'all']
     end
     line.unshift('-t', properties[:table])
   end
